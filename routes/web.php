@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CalculosController;
+use App\Http\Controllers\KeepinhoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,13 +13,15 @@ Route::get('/teste', function () {
 });
 
 //em ordem, valor = $valor; 
-Route::get('/teste/{valor}', function ($valor) {
-    return "Você digitou: {$valor}";
-});
 
-Route::get('/soma/{x}/{y}', function ($x,$y) {
-    return $x + $y;
-});
+//Cálculos
+Route::get('/calc/somar/{x}/{y}', [CalculosController::class, 'somar']);
+Route::get('/calc/subtrair/{x}/{y}', [CalculosController::class, 'subtrair']);
+Route::get('/calc/multiplicar/{x}/{y}', [CalculosController::class, 'multiplicar']);
+Route::get('/calc/dividir/{x}/{y}', [CalculosController::class, 'dividir']);
+Route::get('/calc/quadrado/{x}', [CalculosController::class, 'quadrado']);
 
-//Calculos
-Route::
+//Keepinho
+Route::prefix('/keep')->group(function () {
+    Route::get('/', [KeepinhoController::class, 'index']);
+});
