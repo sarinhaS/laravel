@@ -11,5 +11,13 @@
 @foreach ($notas as $nota)
     <div>
         {{ $nota->texto }}
+        <br>
+        <a href="{{ route('keep.editar', $nota->id )}}">Editar</a>
     </div>
+
+    <form action="{{ route('keep.apagar', $nota->id) }}" method="post">
+        @method('DELETE')
+        @csrf
+        <input type="submit" value="Apagar">
+    </form>
 @endforeach
