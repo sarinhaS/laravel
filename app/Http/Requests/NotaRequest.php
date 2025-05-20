@@ -21,8 +21,14 @@ class NotaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if(!$this->isMethod('GET')){
+            return [
+                'titulo' => 'required|min:3|max:255',
+                'texto' => 'required',
+            ];
+        }
+
+        return [];
+        
     }
 }

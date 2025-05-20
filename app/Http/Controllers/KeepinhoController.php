@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NotaRequest;
 use App\Models\Nota;
 use Illuminate\Http\Request;
 
@@ -15,13 +16,11 @@ class KeepinhoController extends Controller
         ]);
         //ou compact($var);
     }
-    public function gravar(Request $request) {
+    public function gravar(NotaRequest $request) {
         /*Cria uma nota com todos os valores enviados pelo formulario. Porem,
         a model vai ficar apenas com aqueles listados no $fillable*/
-        $dados = $request->validate([
-            'titulo' => 'required|min:3',
-            'texto' => 'required',
-        ]);
+        $dados = $request->validated();
+
         Nota::create($dados);
         return redirect()->route('keep');
     }
