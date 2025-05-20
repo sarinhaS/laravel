@@ -16,9 +16,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notas', function (Blueprint $table) {
-            $table->id();
-            $table->mediumText('texto');
-            $table->timestamps();
+            $table->string('titulo')->nullable()->after('id');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notas');
+        Schema::dropColumn('titulo');
     }
 };
